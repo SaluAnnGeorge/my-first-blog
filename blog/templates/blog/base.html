@@ -13,8 +13,8 @@
             <a href="{% url 'post_new' %}" class="top-menu">
                 {% include './icons/file-earmark-plus.svg' %}
             </a>
-            <a href="{% url 'post_draft_list' %}" class="top-menu">
-                {% include './icons/pencil-square.svg' %}
+            <a href="{% url 'post_draft_list' %}">Draft Posts</a>
+             {% include './icons/pencil-square.svg' %}
 
             </a>
                 <p class="top-menu">Hello {{ user.username }} <small>(<a href="{% url 'logout' %}">Log out</a>)</small></p>
