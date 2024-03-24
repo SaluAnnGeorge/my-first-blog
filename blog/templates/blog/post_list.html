@@ -3,37 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Blog</title>
+    <title> My Blog</title>
     <style>
+        h1 {
+            text-align: left;
+        }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f8f8f8;
+            color: #333333;
         }
+        
         .page-header {
-            background-color: #333;
+            background-color: #C25100;
             color: #fff;
-            padding: 10px 20px;
+            padding: 20px;
+            text-align: center;
+        }
+        .page-header h1 {
+            margin: 0;
+            font-size: 32px;
         }
         .top-menu {
             color: #fff;
             text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #030101;
         }
         .top-menu:hover {
-            text-decoration: underline;
+            background-color: #777;
         }
         .font-changer {
             margin: 20px 0;
+            text-align: center;
+        }
+        #fontSelector {
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .posts {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
         }
         .post {
-            border-bottom: 1px solid #ccc;
+            border: 1px solid #ccc;
+            border-radius: 5px;
             padding: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .post:hover {
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
         }
         .date {
             color: #666;
+            margin-bottom: 10px;
+        }
+        .post h1 {
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .post p {
+            line-height: 1.6;
         }
         .post a {
-            color: #333;
+            color: #007bff;
             text-decoration: none;
         }
         .post a:hover {
@@ -43,10 +83,9 @@
 </head>
 <body>
     <div class="page-header">
+        <h1>  My Blog</h1>
         {% if user.is_authenticated %}
-        <a href="{% url 'post_new' %}" class="top-menu">
-            Add New Post
-        </a>
+        <a href="{% url 'post_new' %}" class="top-menu">Add New Post</a>
         {% endif %}
     </div>
     <div class="font-changer">
@@ -86,4 +125,3 @@
     </script>
 </body>
 </html>
-
