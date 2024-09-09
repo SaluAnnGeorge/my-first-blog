@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Django Girls Blog</title>
+    <style>
+        h1 {
+            text-align: left;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            color: #333333;
+        }
+        
+        .page-header {
+            background-color: #C25100;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .page-header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+        .top-menu {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #030101;
+        }
+        .top-menu:hover {
+            background-color: #777;
+        }
+        .font-changer {
+            margin: 20px 0;
+            text-align: center;
+        }
+        #fontSelector {
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .posts {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .post {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .post:hover {
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+        }
+        .date {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .post h1 {
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .post p {
+            line-height: 1.6;
+        }
+        .post a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .post a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-header">
+        <h1>  Django Girls Blog</h1>
+        {% if user.is_authenticated %}
+        <a href="{% url 'post_new' %}" class="top-menu">Add New Post</a>
+        {% endif %}
+    </div>
+    <div class="font-changer">
+        <label for="fontSelector">Select Font:</label>
+        <select id="fontSelector" onchange="changeFont()">
+            <option value="Arial, sans-serif">Arial</option>
+            <option value="Verdana, sans-serif">Verdana</option>
+            <option value="Roboto, sans-serif">Roboto</option>
+            <option value="Helvetica, sans-serif">Helvetica</option>
+            <option value="Georgia, serif">Georgia</option>
+            <option value="Times New Roman, serif">Times New Roman</option>
+            <option value="Courier New, monospace">Courier New</option>
+        </select>
+    </div>
+
+    <div class="posts">
+        {% block content %}
+            {% for post in posts %}
+                <div class="post">
+                    <div class="date">{{ post.published_date }}</div>
+                    <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                    <p>{{ post.text|linebreaksbr }}</p>
+                    <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>
+                </div>
+            {% endfor %}
+        {% endblock content %}
+    </div>
+
+    <script>
+        function changeFont() {
+            var selectedFont = document.getElementById("fontSelector").value;
+            var contentElements = document.querySelectorAll(".post, .post h1, .post p, .post a");
+            contentElements.forEach(function(element) {
+                element.style.fontFamily = selectedFont;
+            });
+        }
+    </script>
+</body>
+</html>
